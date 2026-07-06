@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>La Cagada del Manso - Peña La Comuna</title>
+    <meta name="description" content="Toda la información sobre la Cagada del Manso de Brea de Tajo. Consulta las bases del sorteo de 500€, visualiza el plano de la plaza y prueba nuestro simulador interactivo.">
+    <meta name="keywords" content="la cagada del manso, bases del sorteo, plano de la plaza, Brea de Tajo, 500 euros, peña la comuna, plaza de toros">
+    
+    <!-- Open Graph / Facebook / Instagram -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sites.google.com/view/laacomuunaa/cagada-del-manso">
+    <meta property="og:title" content="La Cagada del Manso - Bases y Simulador | La Comuna">
+    <meta property="og:description" content="Descubre las bases del sorteo, ve los carteles oficiales y prueba el simulador interactivo de parcelas de la plaza de toros. ¡Premio de 500€!">
+    <meta property="og:image" content="assets/images/cartel_manso.jpg">
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐂</text></svg>">
+
+    <!-- CSS Links -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo font-pirata">
+                LA COMUNA<span>.</span>
+            </a>
+            
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="cagada-del-manso.html" class="active">Cagada del Manso</a></li>
+                    <li><a href="index.html#eventos">Eventos</a></li>
+                    <li><a href="index.html#donde-estamos">Dónde Estamos</a></li>
+                    <li><a href="https://www.instagram.com/laacomuunaa/" target="_blank" class="btn-cta"><i class="fab fa-instagram"></i> Instagram</a></li>
+                </ul>
+            </nav>
+            
+            <button class="menu-toggle" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Event Hero -->
+        <section class="event-hero">
+            <div class="container">
+                <span class="event-title-badge">Gran Evento de Fiestas</span>
+                <h1 class="font-pirata">La Cagada del Manso</h1>
+                <div class="location-badge" style="animation: none; margin-bottom: 0;">
+                    <i class="far fa-calendar-alt"></i> Sábado, 11 de Octubre a las 10:00h | Plaza de Toros de Brea de Tajo
+                </div>
+            </div>
+        </section>
+
+        <!-- Conditions and Posters -->
+        <section class="section-padding">
+            <div class="container conditions-grid">
+                <!-- Bases of the Event -->
+                <div class="conditions-card">
+                    <h3>Condiciones del Evento</h3>
+                    <ul class="conditions-list">
+                        <li>
+                            Cada papeleta tiene un <strong>número único</strong> que corresponde exactamente a una de las parcelas numeradas en las que se dividirá el ruedo de la plaza de toros.
+                        </li>
+                        <li>
+                            <strong>La primera parcela</strong> donde el manso decida realizar su deposición (cagar) será declarada la ganadora del gran premio.
+                        </li>
+                        <li>
+                            Si el manso caga mientras camina, la parcela premiada será aquella donde haya caído <strong>el primer fragmento</strong> del excremento.
+                        </li>
+                        <li>
+                            En caso de que la deposición caiga exactamente compartida entre dos o más parcelas, el ganador absoluto será el dueño de la parcela que contenga <strong>la mayor cantidad de excremento</strong>.
+                        </li>
+                        <li>
+                            Si transcurren <strong>15 minutos</strong> sin que el manso cague, el premio se otorgará mediante un sorteo tradicional en el ruedo utilizando los números de las papeletas vendidas.
+                        </li>
+                        <li>
+                            Si la deposición se realiza en una parcela cuyo número no ha sido vendido, el sorteo continuará y <strong>se esperará a la siguiente deposición</strong> que ocurra en una casilla vendida.
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Gallery Cards -->
+                <div class="media-gallery">
+                    <div class="gallery-card">
+                        <div class="gallery-img-wrapper">
+                            <img src="assets/images/cartel_manso.jpg" alt="Cartel Oficial de la Cagada del Manso">
+                            <div class="gallery-overlay">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                        <div class="gallery-caption">Cartel Oficial del Evento</div>
+                    </div>
+
+                    <div class="gallery-card">
+                        <div class="gallery-img-wrapper">
+                            <img src="assets/images/plantilla_plaza.jpg" alt="Distribución de cuadrículas en la Plaza de Toros">
+                            <div class="gallery-overlay">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                        <div class="gallery-caption">Distribución de Casillas (Ruedo)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Plaza Simulator -->
+        <section class="section-padding interactive-section">
+            <div class="container">
+                <div class="simulator-container">
+                    <div class="simulator-header">
+                        <h3 class="font-pirata">Reservas del Ruedo</h3>
+                        <p>Interactúa con la plaza de toros dividida. Haz clic en cualquier casilla para ver su estado o realizar una reserva en tiempo real.</p>
+                        
+                        <!-- Buscador de celdas -->
+                        <div class="search-box">
+                            <input type="number" id="cellSearchInput" min="1" max="625" placeholder="Casilla a buscar (1-625)">
+                            <button id="btnSearchCell" class="btn-search"><i class="fas fa-search"></i> Buscar</button>
+                            <button id="btnResetZoom" class="btn-reset" style="display: none;"><i class="fas fa-compress-arrows-alt"></i> Ver plaza completa</button>
+                        </div>
+                    </div>
+                    
+                    <div class="simulator-layout">
+                        <!-- Left: Plaza Grid -->
+                        <div class="plaza-container">
+                            <div class="grid-wrapper">
+                                <div id="plazaGrid" class="plaza-grid"></div>
+                            </div>
+                            <p style="font-size: 0.85rem; color: var(--accent); margin-top: 1rem; text-align: center; line-height: 1.4; max-width: 450px; margin-left: auto; margin-right: auto;">
+                                ⚠️ <strong>Nota importante:</strong> El orden de las casillas en esta cuadrícula es meramente ilustrativo para facilitar la reserva. La disposición y el orden oficial definitivo de las celdas en el ruedo se publicarán antes del sorteo.
+                            </p>
+                        </div>
+                        
+                        <!-- Right: Details panel -->
+                        <div class="simulator-info">
+                            <ul class="legend-list">
+                                <li class="legend-item">
+                                    <div class="legend-color color-free"></div>
+                                    <span>Libre (Disponible)</span>
+                                </li>
+                                <li class="legend-item">
+                                    <div class="legend-color color-sold"></div>
+                                    <span>Reservado (Pago pendiente)</span>
+                                </li>
+                                <li class="legend-item">
+                                    <div class="legend-color color-winner"></div>
+                                    <span>Asignado (Confirmado)</span>
+                                </li>
+                            </ul>
+                            
+                            <div class="cell-details-panel">
+                                <h4>Detalles de Parcela</h4>
+                                <div class="detail-row">
+                                    <span class="detail-label">Número de Casilla:</span>
+                                    <span class="detail-value" id="detailCellNum">#--</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Estado:</span>
+                                    <span class="detail-value" id="detailCellStatus">Selecciona una casilla</span>
+                                </div>
+                                <div class="detail-row" id="rowOwner" style="display: none;">
+                                    <span class="detail-label">Propietario / Dueño:</span>
+                                    <span class="detail-value" id="detailCellOwner">-</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Precio Papeleta:</span>
+                                    <span class="detail-value" id="detailCellPrice">-</span>
+                                </div>
+                                
+                                <!-- Formulario de Reserva -->
+                                <form id="reserveForm" class="reserve-form" style="display: none;">
+                                    <div class="form-group">
+                                        <label for="reserveNombre">Nombre *</label>
+                                        <input type="text" id="reserveNombre" required placeholder="Tu Nombre">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="reserveApellido">Apellido *</label>
+                                        <input type="text" id="reserveApellido" required placeholder="Tu Apellido">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="reserveTelefono">Teléfono (Opcional, interno)</label>
+                                        <input type="tel" id="reserveTelefono" placeholder="Ej: 600123456">
+                                    </div>
+                                    <button type="submit" id="btnSubmitReservation" class="btn-simulator-action">
+                                        Confirmar Reserva (2,50 €)
+                                    </button>
+                                </form>
+
+                                <!-- Mensaje de Estado -->
+                                <div id="statusMsg" class="status-msg"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <button class="lightbox-close" aria-label="Cerrar modal">&times;</button>
+        <div class="lightbox-content">
+            <img src="" alt="Imagen ampliada">
+            <div class="lightbox-caption"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-info">
+                    <h3 class="font-pirata">LA COMUNA</h3>
+                    <p>La peña que le da vida y color a las fiestas patronales de Brea de Tajo. Tradición, música, y muchas risas con nuestra gente.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/laacomuunaa/" target="_blank" class="social-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Navegación</h4>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="cagada-del-manso.html">Cagada del Manso</a></li>
+                        <li><a href="index.html#eventos">Eventos</a></li>
+                        <li><a href="index.html#donde-estamos">Ubicación</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><span class="text-muted"><i class="fas fa-envelope"></i> peñalacomuna@gmail.com</span></li>
+                        <li><span class="text-muted"><i class="fab fa-instagram"></i> @laacomuunaa</span></li>
+                        <li><span class="text-muted"><i class="fas fa-map-marker-alt"></i> Brea de Tajo, Madrid</span></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Peña La Comuna Brea de Tajo. Todos los derechos reservados.</p>
+                <p>Diseñado para SEO y optimizado por Antigravity</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" aria-label="Volver arriba">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JS Scripts -->
+    <script src="js/main.js"></script>
+</body>
+</html>
