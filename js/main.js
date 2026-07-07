@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Carga inicial de datos desde Google Apps Script JSON
         function fetchPlazaData() {
             // Mostrar mensaje de carga inicial en la cuadrícula
-            plazaGrid.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding: 2rem; color: var(--primary);"><i class="fas fa-circle-notch spinner" style="font-size: 2rem; margin-bottom: 0.5rem;"></i><br>Sincronizando ruedo con Google Sheets...</div>';
+            plazaGrid.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding: 2rem; color: var(--primary);"><i class="fas fa-circle-notch spinner" style="font-size: 2rem; margin-bottom: 0.5rem;"></i><br>Montando el ruedo, no tenga tanta prisa en comprar ...</div>';
             
             // Añadimos un timestamp para evitar cache del navegador
             const fetchUrl = `${APPS_SCRIPT_URL}?t=${Date.now()}`;
@@ -312,14 +312,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // Detectar si el usuario está en móvil (pantallas menores o iguales a 768px de ancho)
                 const isMobile = window.innerWidth <= 768;
-                const zoomSize = isMobile ? 6 : 9;
+                const zoomSize = isMobile ? 5 : 9;
                 
-                // Definir los límites del viewport (6x6 en móvil, 9x9 en desktop)
+                // Definir los límites del viewport (5x5 en móvil, 9x9 en desktop)
                 let startRow, endRow;
                 if (isMobile) {
-                    // Para 6x6, mostramos 2 celdas arriba y 3 abajo
+                    // Para 5x5, mostramos 2 celdas arriba y 2 abajo (el objetivo queda perfectamente en el centro)
                     startRow = row - 2;
-                    endRow = row + 3;
+                    endRow = row + 2;
                 } else {
                     // Para 9x9, mostramos 4 celdas arriba y 4 abajo
                     startRow = row - 4;
@@ -339,7 +339,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 let startCol, endCol;
                 if (isMobile) {
                     startCol = col - 2;
-                    endCol = col + 3;
+                    endCol = col + 2;
                 } else {
                     startCol = col - 4;
                     endCol = col + 4;
@@ -427,11 +427,107 @@ document.addEventListener('DOMContentLoaded', () => {
                 plazaGrid.style.width = '';
                 plazaGrid.style.height = '';
                 plazaGrid.style.gap = '';
+                plazaGrid.style.fontSize = '';
                 
                 // Ocultar botón de resetear vista y vaciar input
                 btnResetZoom.style.display = 'none';
                 cellSearchInput.value = '';
+                
+                // Resetear zoom
+                currentZoom = 1.0;
+                if (zoomLabel) zoomLabel.textContent = '100%';
             });
+
+            // ==========================================
+            // Zoom por Botones y Gestos Táctiles (Pinch-to-Zoom)
+            // ==========================================
+            const btnZoomIn = document.getElementById('btnZoomIn');
+            const btnZoomOut = document.getElementById('btnZoomOut');
+            const zoomLabel = document.getElementById('zoomLabel');
+            
+            let currentZoom = 1.0;
+            const minZoom = 0.6;
+            const maxZoom = 2.4;
+            const zoomStep = 0.2;
+            
+            function getBaseSize() {
+                return window.innerWidth <= 480 ? 480 : 550;
+            }
+            
+            function applyZoom() {
+                const baseSize = getBaseSize();
+                const newSize = baseSize * currentZoom;
+                
+                // Solo escalamos si no está en modo búsqueda (zoomed-view)
+                if (!plazaGrid.classList.contains('zoomed-view')) {
+                    plazaGrid.style.width = `${newSize}px`;
+                    plazaGrid.style.height = `${newSize}px`;
+                    
+                    // Escalar proporcionalmente la tipografía
+                    const baseFontSize = 0.52; // rem
+                    plazaGrid.style.fontSize = `${baseFontSize * currentZoom}rem`;
+                }
+                
+                if (zoomLabel) {
+                    zoomLabel.textContent = `${Math.round(currentZoom * 100)}%`;
+                }
+            }
+            
+            if (btnZoomIn && btnZoomOut) {
+                btnZoomIn.addEventListener('click', () => {
+                    if (currentZoom < maxZoom) {
+                        currentZoom += zoomStep;
+                        applyZoom();
+                    }
+                });
+                
+                btnZoomOut.addEventListener('click', () => {
+                    if (currentZoom > minZoom) {
+                        currentZoom -= zoomStep;
+                        applyZoom();
+                    }
+                });
+            }
+            
+            // Función auxiliar para calcular la distancia entre dos puntos táctiles
+            function getDistance(touches) {
+                const dx = touches[0].clientX - touches[1].clientX;
+                const dy = touches[0].clientY - touches[1].clientY;
+                return Math.sqrt(dx * dx + dy * dy);
+            }
+            
+            // Soporte de Gesto Táctil de Pellizco (Pinch-to-Zoom)
+            const gridWrapper = plazaGrid.parentElement;
+            let touchStartDist = 0;
+            let startZoom = 1.0;
+            
+            if (gridWrapper) {
+                gridWrapper.addEventListener('touchstart', (e) => {
+                    if (e.touches.length === 2) {
+                        touchStartDist = getDistance(e.touches);
+                        startZoom = currentZoom;
+                    }
+                }, { passive: true });
+                
+                gridWrapper.addEventListener('touchmove', (e) => {
+                    if (e.touches.length === 2 && touchStartDist > 0) {
+                        const dist = getDistance(e.touches);
+                        const factor = dist / touchStartDist;
+                        
+                        let newZoom = startZoom * factor;
+                        newZoom = Math.min(Math.max(newZoom, minZoom), maxZoom);
+                        
+                        currentZoom = Math.round(newZoom * 100) / 100;
+                        applyZoom();
+                    }
+                }, { passive: true });
+                
+                gridWrapper.addEventListener('touchend', (e) => {
+                    if (e.touches.length < 2) {
+                        touchStartDist = 0;
+                    }
+                });
+            }
         }
 
         // Carga inicial al cargar la página
