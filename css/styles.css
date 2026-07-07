@@ -934,6 +934,7 @@ footer {
     height: 550px;
     margin: auto;
     user-select: none;
+    font-size: 0.52rem;
 }
 
 @media (max-width: 480px) {
@@ -951,7 +952,7 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.52rem;
+    font-size: inherit;
     font-weight: 600;
     cursor: pointer;
     transition: var(--transition);
